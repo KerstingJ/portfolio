@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "next/link";
+import Link from "next/link";
 import styled from "styled-components";
 
 export default function HeaderComponent(props) {
@@ -10,14 +10,14 @@ export default function HeaderComponent(props) {
           <h1>Josh Kersting</h1>
         </a>
         <nav>
-          <Link to="/">
+          <Link href="/">
             <a>Home</a>
           </Link>
-          <Link to="/about">
+          <Link href="/about">
             <a>About</a>
           </Link>
-          <Link to="/projects">
-            <a>Projects</a>
+          <Link href="/blog">
+            <a>Blog</a>
           </Link>
         </nav>
       </article>

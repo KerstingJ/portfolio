@@ -1,21 +1,14 @@
 import Head from "next/head";
 import styled from "styled-components";
 
-import Header from "../pieces/Header";
-import Footer from "../pieces/Footer";
-
-export default function MainLayout({ children }) {
+export default function IndexLayout({ children }) {
   return (
     <>
       <Head>
         <title>Josh Kersting - Software Developer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container>
-        <Header />
-        {children}
-        <Footer />
-      </Container>
+      <Container>{children}</Container>
     </>
   );
 }
