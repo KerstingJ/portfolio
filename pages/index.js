@@ -167,7 +167,7 @@ const Main = styled.main`
       rgba(63, 187, 255, 1) 0%,
       rgba(109, 47, 217, 1) 35%,
       rgba(98, 37, 203, 1) 46%,
-      rgba(252, 146, 185, 1) 100%
+      rgba(255, 192, 185, 1) 100%
     );
     position: relative;
     display: flex;
