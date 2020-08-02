@@ -5,6 +5,20 @@ html {
 
   font-size: 62.5%;
   --main-color: rgb(2, 121, 233);
+  --secondary-color: rgba(255, 192, 185, 1);
+  --secondary-color-transparent-50: rgba(255, 192, 185, 0.5);
+
+  --white-but-chilly: #f8fcff;
+
+  --header-gradient: linear-gradient(
+    67deg,
+    rgba(63, 187, 255, 1) 0%,
+    rgba(109, 47, 217, 1) 35%,
+    rgba(98, 37, 203, 1) 46%,
+    rgba(255, 192, 185, 1) 100%
+  );
+
+  --snappy-transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 *,
@@ -13,6 +27,12 @@ html {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+  line-height: 1.35;
+}
+
+*::selection {
+  color: var(--main-color);
+  background: var(--secondary-color-transparent-50);
 }
 
 * {
@@ -25,10 +45,12 @@ h1 {
 
 h2 {
   font-size: 2.8rem;
+  font-family: "Oxygen", sans-serif;
 }
 
 h3 {
   font-size: 2.4rem;
+  font-family: "Oxygen", sans-serif;
 }
 
 img {
@@ -64,7 +86,7 @@ input[type="date"] {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

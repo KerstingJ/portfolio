@@ -1,6 +1,8 @@
 import Head from "next/head";
 import styled from "styled-components";
 
+import Header from "../pieces/Header";
+
 export default function IndexLayout({ children }) {
   return (
     <>
@@ -8,7 +10,10 @@ export default function IndexLayout({ children }) {
         <title>Josh Kersting - Software Developer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container>{children}</Container>
+      <Container>
+        <Header />
+        {children}
+      </Container>
     </>
   );
 }

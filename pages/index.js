@@ -16,15 +16,17 @@ function About(props) {
           />
           <section className="details-content">
             <h2>My Name is Josh</h2>
-            <h3>I like solving hard problems with cool people.</h3>
+            <h3 className="sub-header">
+              I like solving hard problems with cool people.
+            </h3>
             <p>
               I build web and mobile applications as Frontend Engineer at
               Sampleserve, and as a Freelance Developer.
             </p>
             <p>
-              I have spent the last 2 years working extensively with React,
-              React Native, Redux, and other Frontend technologies on top of
-              serverless and RESTful apis.
+              I've spent the last 2 years working extensively with React and
+              other Frontend technologies, on top of serverless and RESTful
+              apis.
             </p>
           </section>
         </section>
@@ -33,22 +35,26 @@ function About(props) {
       <div className="container">
         <article className="the-work">
           <h2>Check Out My Blog!</h2>
-          {[{}].map(({ title, link, short }) => {
-            return (
-              <div className="post-card">
-                <Link href={"/about"}>
-                  <a>
-                    <h4>{title || "Post Title"}</h4>
-                  </a>
-                </Link>
-                <p>
-                  {short ||
-                    "What is this post all about, heres the question im answering"}
-                </p>
-                <Link href={link || "#"}>Read Post</Link>
-              </div>
-            );
-          })}
+          {[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}].map(
+            ({ title, link, short }) => {
+              return (
+                <div className="post-card">
+                  <Link href={"/about"}>
+                    <a>
+                      <h4>{title || "Post Title"}</h4>
+                    </a>
+                  </Link>
+                  <p>
+                    {short ||
+                      "What is this post all about, heres the question im answering"}
+                  </p>
+                  <Link href={link || "#"}>
+                    <a>Read Post</a>
+                  </Link>
+                </div>
+              );
+            }
+          )}
         </article>
       </div>
 
@@ -117,13 +123,18 @@ const Main = styled.main`
   /* display: flex;
   justify-content: space-between;
   align-items: flex-start; */
-  background: #f8fcff;
+  background: var(--white-but-chilly);
   min-height: 100vh;
 
   h2,
   h3 {
     color: var(--main-color);
     margin-bottom: 16px;
+  }
+
+  h3.sub-header {
+    font-size: 1.9rem;
+    font-weight: 600;
   }
 
   h4 {
@@ -137,7 +148,7 @@ const Main = styled.main`
     transition: all 0.35s ease;
 
     &:hover {
-      color: #fc92b9;
+      color: var(--secondary-color);
       text-decoration: underline;
     }
   }
@@ -162,18 +173,12 @@ const Main = styled.main`
 
   .about {
     background: rgb(63, 187, 255);
-    background: linear-gradient(
-      67deg,
-      rgba(63, 187, 255, 1) 0%,
-      rgba(109, 47, 217, 1) 35%,
-      rgba(98, 37, 203, 1) 46%,
-      rgba(255, 192, 185, 1) 100%
-    );
+    background: var(--header-gradient);
     position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 64px;
+    padding-top: 128px;
 
     /* &:after {
       content: "";
@@ -217,9 +222,7 @@ const Main = styled.main`
   }
 
   .details-content {
-    max-width: 450px;
-
-    padding: 0 16px;
+    padding: 0 16px 0 24px;
 
     @media (max-width: 500px) {
       padding: 16px 0;

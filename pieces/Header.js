@@ -27,8 +27,10 @@ export default function HeaderComponent(props) {
 
 const Header = styled.header`
   width: 100%;
-  border-bottom: 1px solid lightgray;
   padding: 15px;
+  position: absolute;
+  z-index: 1;
+  color: white;
 
   article {
     max-width: 1000px;
@@ -53,17 +55,19 @@ const Header = styled.header`
   a {
     font-size: 2rem;
     margin-left: 20px;
-    color: var(--main-color);
+    color: white;
 
-    transition: color 0.35s ease;
+    transition: all var(--snappy-transition);
 
     &.active {
-      color: var(--main-color);
+      color: white;
       font-weight: bold;
     }
 
     &:hover {
-      color: black;
+      display: inline-block;
+      transform: scale(1.15);
+      text-decoration: none;
     }
   }
 `;
