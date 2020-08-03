@@ -52,6 +52,10 @@ const Header = styled.header`
     }
   }
 
+  nav::first-child {
+    margin-left: 0;
+  }
+
   a {
     font-size: 2rem;
     margin-left: 20px;

@@ -6,6 +6,7 @@ html {
   font-size: 62.5%;
   --main-color: rgb(2, 121, 233);
   --secondary-color: rgba(255, 192, 185, 1);
+  --secondary-color-light: #ffdfdc;
   --secondary-color-transparent-50: rgba(255, 192, 185, 0.5);
 
   --white-but-chilly: #f8fcff;
@@ -32,11 +33,19 @@ html {
 
 *::selection {
   color: var(--main-color);
-  background: var(--secondary-color-transparent-50);
+  background: var(--secondary-color-light);
 }
 
 * {
   font-size: 1.6rem;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--main-color);
 }
 
 h1 {

@@ -35,86 +35,26 @@ function About(props) {
       <div className="container">
         <article className="the-work">
           <h2>Check Out My Blog!</h2>
-          {[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}].map(
-            ({ title, link, short }) => {
-              return (
-                <div className="post-card">
-                  <Link href={"/about"}>
-                    <a>
-                      <h4>{title || "Post Title"}</h4>
-                    </a>
-                  </Link>
-                  <p>
-                    {short ||
-                      "What is this post all about, heres the question im answering"}
-                  </p>
-                  <Link href={link || "#"}>
-                    <a>Read Post</a>
-                  </Link>
-                </div>
-              );
-            }
-          )}
+          {[{}].map(({ title, link, short }, idx) => {
+            return (
+              <div className="post-card" key={title + idx}>
+                <Link href={"/about"}>
+                  <a>
+                    <h4>{title || "Post Title"}</h4>
+                  </a>
+                </Link>
+                <p>
+                  {short ||
+                    "What is this post all about, This is a placeholder."}
+                </p>
+                <Link href={link || "#"}>
+                  <a>Read Post</a>
+                </Link>
+              </div>
+            );
+          })}
         </article>
       </div>
-
-      {/* <article className="the-work">
-        <section className="brief">
-          <h4>My favorite tools to work with</h4>
-          <p>Javascript, Python, CSS, and HTML</p>
-        </section>
-        <section className="projects">
-          <h4>Things I've built</h4>
-          <p>
-            <strong>Sampleserve</strong> Project management tool for
-            environmental sampling. React web app with flask backend. Used Redux
-            and immutable.js for state management, SQLAlchemy and Postgresql on
-            the backend.
-          </p>
-          <p>
-            <strong>Tieme Ndo</strong> CMS to keep track of leads, loans, and
-            inventory. React web app with Java Spring Backend. Used Redux and
-            bootstrap on the frontend, Hibernate and Postgresql on the backend.
-          </p>
-          <p>
-            <strong>BarHopper</strong> Directory style app with geolocation and
-            social features. Consumer facing React-Native mobile app,
-            administrative web app with React, and a firebase serverless
-            Backend.
-          </p>
-        </section>
-      </article> */}
-
-      {/* <div className="about-footer">
-        <article className="social-links">
-          <h3>More Links</h3>
-          <nav>
-            <a href="https://github.com/KerstingJ">Github</a>
-            <a href="https://twitter.com/JoshOnThaTweet">Twitter</a>
-            <a href="https://www.linkedin.com/in/josh-kersting-86142911b/">
-              LinkedIn
-            </a>
-            <a href="mailto:Kersting.Josh@Gmail.com">Email</a>
-          </nav>
-        </article>
-        <article className="values">
-          <h3>My Beliefs</h3>
-          <section className="value-content">
-            <p>
-              <h6>People are kind </h6>
-              and act with the best intentions.
-            </p>
-            <p>
-              <h6>Together we are more </h6>
-              It's our job to uplift, empower, and include each other.
-            </p>
-            <p>
-              <h6>Never stop learning </h6>
-              because the world never stops changing.
-            </p>
-          </section>
-        </article>
-      </div> */}
     </Main>
   );
 }
@@ -128,7 +68,6 @@ const Main = styled.main`
 
   h2,
   h3 {
-    color: var(--main-color);
     margin-bottom: 16px;
   }
 
@@ -138,14 +77,13 @@ const Main = styled.main`
   }
 
   h4 {
-    color: var(--main-color);
     font-size: 2rem;
   }
 
   a > h4 {
     display: inline-block;
     cursor: pointer;
-    transition: all 0.35s ease;
+    transition: all var(--snappy-transition);
 
     &:hover {
       color: var(--secondary-color);
@@ -154,7 +92,6 @@ const Main = styled.main`
   }
 
   h6 {
-    color: var(--main-color);
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 8px;
@@ -258,7 +195,7 @@ const Main = styled.main`
     width: 100%;
     box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
 
-    padding: 16px 32px;
+    padding: 32px 64px;
     border-radius: 8px;
     background: #fff;
 

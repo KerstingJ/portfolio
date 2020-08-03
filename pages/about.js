@@ -1,229 +1,397 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import { usePopper } from "react-popper";
 import styled from "styled-components";
 import { withLayout } from "../layouts/withLayout";
-import MainLayout from "../layouts/MainLayout";
+import IndexLayout from "../layouts/IndexLayout";
+import Link from "next/link";
 
 function About(props) {
+  const timerRef = useRef(null);
+  const [referenceElement, setReferenceElement] = useState(null);
+  const [popperElement, setPopperElement] = useState(null);
+  const [arrowElement, setArrowElement] = useState(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    modifiers: [{ name: "arrow", options: { element: arrowElement } }],
+  });
+
+  const copyEmailToClipboard = (e) => {
+    e.preventDefault();
+    setReferenceElement(e.target);
+    navigator.clipboard.writeText("Kersting.Josh@gmail.com");
+    toggleVisibility();
+  };
+
+  const toggleVisibility = () => {
+    if (!popperElement) {
+      return;
+    }
+
+    if (timerRef.current) {
+      // clear the timeout
+      clearTimeout(timerRef.current);
+    }
+
+    // make element invisible if it isnt already
+    if (popperElement.classList.contains("visible"))
+      popperElement.classList.remove("visible");
+    // make element visible and set timer to make it go away
+    popperElement.classList.add("visible");
+    timerRef.current = setTimeout(
+      () => popperElement.classList.remove("visible"),
+      1000
+    );
+  };
+
   return (
     <Main>
       <article className="about">
         <section className="details">
-          <img
-            className="profile-pic"
-            src="./images/me.jpg"
-            alt="Handsome And Talented Software Developer"
-          />
-          <section className="details-content">
-            <h2>Josh Kersting</h2>
+          <h3>Let me tell you about myself</h3>
+          <p>
+            I spent most of my professional life traveling the Mid-South and
+            Mid-west helping grass-roots organizations manage data. Thats when I
+            started programming professionally. We used to spend days and weeks
+            manually transcribing data from one system to another. I taught
+            myself python to automate the process and use that time to focus on
+            turning that data into actionable insights.
+          </p>
+          <p>
+            After moving back to Michigan I joined Lambda School at the
+            beginning of 2019, where I completed their curriculum in Computer
+            Science and Web Development. I liked it so much I became a Team Lead
+            mentoring and teaching students web development with React and
+            Express.
+          </p>
+          <p>
+            At the end of 2019 I joined SampleServe as a Frontend Engineer.
+            Since then I have been working with React and React-native building
+            out features on our web and mobile apps. I've focused on reducing
+            bugs and improving code quality by adding automated linting,
+            formatting, and testing.
+          </p>
+          <p>
+            I also develop web and mobile applications as a Freelance Developer.
+            Lets work together!
+          </p>
+        </section>
+      </article>
+
+      <div className="container">
+        <article className="the-work">
+          <section className="projects">
+            <h3>Things I've built</h3>
             <p>
-              <strong>Software Engineer</strong>
+              <strong>Sampleserve</strong> Project management tool for
+              environmental sampling. React web app with flask backend. Used
+              Redux and immutable.js for state management, SQLAlchemy and
+              Postgresql on the backend.
             </p>
             <p>
-              <strong>Location: </strong>Traverse City, Mi
+              <strong>Tieme Ndo</strong> CMS to keep track of leads, loans, and
+              inventory. React web app with Java Spring Backend. Used Redux and
+              bootstrap on the frontend, Hibernate and Postgresql on the
+              backend.
             </p>
             <p>
-              <strong>Languages: </strong>Javascript, Python, Java, HTML, CSS,
-              SQL, noSQL
+              <strong>BarHopper</strong> Directory style app with geolocation
+              and social features. Consumer facing React-Native mobile app,
+              administrative web app with React, and a firebase serverless
+              Backend.
             </p>
             <p>
-              <strong>Libraries/Frameworks: </strong>
-              React.JS, Redux.js, Spring, Hibernate, Thunks, Firebase, Axios,
-              Postgresql, Styled-components, reactstrap, canvas, and more...
+              And More!
+              <button
+                ref={setReferenceElement}
+                className="lets-talk"
+                onClick={copyEmailToClipboard}
+              >
+                Lets talk
+              </button>
+              to learn more about my experience
             </p>
           </section>
-        </section>
-        <section className="brief">
-          <h3>About</h3>
-          <p>
-            I am a Software Engineer, and Father. Born in Muskegon, Mi, I spent
-            most of my professional life traveling the Mid-South and Mid-west
-            helping grass-roots organizations manage and use data to drive
-            organizational goals.
-          </p>
-          <p>
-            After moving back home to be closer to family I joined Lambda
-            School, where I not only completed their curriculum in Computer
-            Science and Web Development in 2019, but was also a Team Lead
-            mentoring and teaching students working their way through the
-            curriculum.
-          </p>
-          <p>
-            In October 2019 I joined SampleServe as a Frontend Engineer, Where I
-            spent the last year working extensively with React, React Native,
-            and other Frontend technologies. I also worked with clients to
-            identify problems and plan new features.
-          </p>
-        </section>
-      </article>
-      <article className="values">
-        <section className="value-block">
-          <h3>Who am I?</h3>
-          <p>
-            We are what we believe. These are the beliefs that form the core of
-            who I am.
-          </p>
-        </section>
-        <section className="value-content">
-          <p>
-            <strong>People are kind </strong>
-            Looking at the news, and media, we love to have a bad guy. We love
-            heros more, but how does a hero exist without a villain? I believe
-            they exist in everyday acts of kindness. When I look at my sons
-            chocolate covered face, as he gestures his dirty little fingers to
-            share candy with his cousin, I see the one thing I know to be true
-            about the world. People are kind and act with the best intentions
-            they know how.
-          </p>
-          <p>
-            <strong>Together we are more </strong>
-            As much as one person can do by themselves, a group can do so much
-            more. There is so much to learn and do in the world oen person
-            couldn't do it all. Luckily we get to share the experiences of
-            others through writings, art, music, and creating things together.
-          </p>
-          <p>
-            <strong>Never stop moving </strong>
-            Sometimes we need to take a step back and look how far we've come,
-            but I cant do that without seeing all the people who have helped me
-            along the way. For the people who believed in me when I didn't
-            believe in myself, I will never give up, I will never stop learning,
-            I will never stop moving forward.
-          </p>
-        </section>
-      </article>
+        </article>
+
+        <article className="the-work">
+          <section className="values">
+            <h3>My core beliefs are</h3>
+            <p>
+              <strong>People are kind </strong>
+              and we should assume they act with the best intentions.
+            </p>
+            <p>
+              <strong>Together we are more </strong>
+              It's our job to uplift, empower, and include each other.
+            </p>
+            <p>
+              <strong>Never stop learning </strong>
+              because the world never stops changing.
+            </p>
+          </section>
+        </article>
+
+        <article className="the-work">
+          <section className="fun">
+            <h3>Want to know more?</h3>
+            <p>Hit me up on social media or send me an email!</p>
+            <nav className="social-links">
+              <a href="https://github.com/KerstingJ">
+                <i className="fab fa-github"></i>Github
+              </a>
+              <a href="https://twitter.com/JoshOnThaTweet">
+                <i className="fab fa-twitter"></i>Twitter
+              </a>
+              <a href="https://www.linkedin.com/in/josh-kersting-86142911b/">
+                <i className="fab fa-linkedin-in"></i>LinkedIn
+              </a>
+              <a href="#" onClick={copyEmailToClipboard}>
+                <i className="fas fa-at"></i>Email
+              </a>
+            </nav>
+          </section>
+        </article>
+      </div>
+
+      <div
+        className="copied-alert"
+        ref={setPopperElement}
+        style={styles.popper}
+        {...attributes.popper}
+      >
+        Email copied to clipboard!
+        <div ref={setArrowElement} style={styles.arrow} />
+      </div>
     </Main>
   );
 }
 
 const Main = styled.main`
-  min-height: 50vh;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px 0;
-
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-start; */
+  background: var(--white-but-chilly);
+  min-height: 100vh;
 
-  & > article {
-    width: 50%;
+  h2,
+  h3 {
+    margin-bottom: 16px;
   }
 
-  h3 {
-    color: var(--main-color);
+  h3.sub-header {
+    font-size: 1.9rem;
+    font-weight: 600;
   }
 
   h4 {
-    color: var(--main-color);
     font-size: 2rem;
+  }
+
+  a > h4 {
+    display: inline-block;
+    cursor: pointer;
+    transition: all var(--snappy-transition);
+
+    &:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+  }
+
+  h6 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 8px;
   }
 
   p {
     font-size: 2rem;
+    margin-bottom: 16px;
   }
 
-  @media (max-width: 1000px) {
-    padding: 20px 10px;
+  strong {
+    color: var(--main-color);
+    font-size: 1.8rem;
+    font-weight: bold;
   }
 
-  @media (max-width: 800px) {
+  .about {
+    background: rgb(63, 187, 255);
+    background: var(--header-gradient);
+    position: relative;
+    display: flex;
     flex-direction: column;
-    & > article {
-      width: unset;
-    }
-  }
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 128px;
 
-  .con-block {
-    width: 49%;
-
-    @media (max-width: 800px) {
-      width: 99%;
-    }
+    /* &:after {
+      content: "";
+      width: 100%;
+      height: 20vh;
+      position: absolute;
+      bottom: -4px;
+      background: url("./images/wavybg.svg");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    } */
   }
 
   .details {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
-    strong {
-      color: var(--main-color);
-      font-weight: bold;
-    }
+    background: #fff;
+    border-radius: 8px;
+    padding: 32px 64px;
+
+    box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
+
+    margin: 8px;
+
+    max-width: 750px;
+
+    z-index: 1;
 
     @media (max-width: 500px) {
-      flex-direction: column;
+      padding: 8px 16px;
     }
   }
 
   .profile-pic {
     display: block;
-    max-width: 500px;
-    max-height: 500px;
-    width: 48%;
+    max-width: 250px;
+    min-height: 250px;
     border-radius: 3px;
     object-fit: cover;
     object-position: bottom right;
+  }
 
-    margin-right: 15px;
+  .container {
+    position: relative;
+    padding: 8px;
+    padding-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    &:before {
+      content: "";
+      width: 100%;
+      /* border: 1px solid red; */
+      height: 20vh;
+      position: absolute;
+      top: -20vh;
+      background: url("./images/wavybg.svg");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .the-work {
+    margin-bottom: 32px;
+    max-width: 750px;
+    width: 100%;
+    box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
+
+    padding: 16px 32px;
+    border-radius: 8px;
+    background: #fff;
+
+    padding: 32px 64px;
+
+    h2 {
+      margin-bottom: 32px;
+    }
 
     @media (max-width: 500px) {
-      width: 100%;
+      padding: 8px 16px;
     }
   }
 
-  .brief {
-    padding: 15px;
-    p {
-      margin-bottom: 15px;
+  nav.social-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 32px 0px;
+
+    i:before {
+      margin-right: 1rem;
     }
-  }
 
-  .details-content {
-    max-width: 500px;
-    width: 49%;
+    a {
+      position: relative;
 
-    @media (max-width: 500px) {
-      width: 100%;
-    }
-  }
+      &:hover {
+        text-decoration: none;
+        color: var(--secondary-color);
 
-  .values {
-    padding: 15px;
+        &:after {
+          background: var(--secondary-color);
+          width: 100%;
+          left: 0;
+        }
+      }
 
-    p {
-      margin-bottom: 15px;
-
-      strong {
-        color: var(--main-color);
-        font-size: 2rem;
-        font-weight: bold;
-        display: block;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        width: 1px;
+        height: 2px;
+        background: transparent;
+        transition: all var(--snappy-transition);
       }
     }
   }
 
-  .value-content {
-    @media (max-width: 800px) {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
+  .post-card {
+    &:first-of-type {
+      margin-top: 16px;
     }
 
-    @media (max-width: 600px) {
-      display: block;
+    &::last-of-type {
+      margin-bottom: 16px;
     }
 
     p {
-      @media (max-width: 800px) {
-        width: 31%;
-      }
+      margin-bottom: 0;
+    }
+  }
 
-      @media (max-width: 600px) {
-        width: 98%;
-      }
+  .lets-talk {
+    transition: all var(--snappy-transition);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    background: inherit;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 0 1rem;
+    display: inline-block;
+    box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+
+  .copied-alert {
+    opacity: 0;
+    box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    margin-top: 24px;
+    background: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--main-color);
+
+    &.visible {
+      opacity: 1;
     }
   }
 `;
 
-export default withLayout(MainLayout)(About);
+export default withLayout(IndexLayout)(About);
