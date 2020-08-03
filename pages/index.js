@@ -144,9 +144,14 @@ const Main = styled.main`
 
     max-width: 750px;
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       flex-direction: column;
     }
+
+    /* @media (max-width: 500px) {
+      padding: 16px 0;
+      width: 100%;
+    } */
   }
 
   .profile-pic {
@@ -156,10 +161,24 @@ const Main = styled.main`
     border-radius: 3px;
     object-fit: cover;
     object-position: bottom right;
+
+    @media (max-width: 600px) {
+      margin: 16px 32px;
+    }
+
+    @media (max-width: 500px) {
+      margin: 0;
+      min-width: 100%;
+      max-width: 100%;
+    }
   }
 
   .details-content {
     padding: 0 16px 0 24px;
+
+    @media (max-width: 600px) {
+      padding: 16px 32px;
+    }
 
     @media (max-width: 500px) {
       padding: 16px 0;
@@ -198,6 +217,10 @@ const Main = styled.main`
     padding: 32px 64px;
     border-radius: 8px;
     background: #fff;
+
+    @media (max-width: 600px) {
+      padding: 16px 32px;
+    }
 
     h2 {
       margin-bottom: 32px;
