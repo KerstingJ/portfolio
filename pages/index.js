@@ -182,7 +182,7 @@ const Main = styled.main`
       /* border: 1px solid red; */
       height: 20vh;
       position: absolute;
-      top: -20vh;
+      top: -19.5vh;
       background: url("./images/wavybg.svg");
       background-size: 100% 100%;
       background-repeat: no-repeat;

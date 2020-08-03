@@ -49,18 +49,16 @@ function About(props) {
           <h3>Let me tell you about myself</h3>
           <p>
             I spent most of my professional life traveling the Mid-South and
-            Mid-west helping grass-roots organizations manage data. Thats when I
-            started programming professionally. We used to spend days and weeks
-            manually transcribing data from one system to another. I taught
-            myself python to automate the process and use that time to focus on
-            turning that data into actionable insights.
+            Mid-west helping grass-roots organizations manage data. We used to
+            spend days and weeks manually transcribing data from one system to
+            another. I taught myself python to automate the process and used my
+            time to focus on turning that data into actionable insights.
           </p>
           <p>
             After moving back to Michigan I joined Lambda School at the
-            beginning of 2019, where I completed their curriculum in Computer
-            Science and Web Development. I liked it so much I became a Team Lead
-            mentoring and teaching students web development with React and
-            Express.
+            beginning of 2019, where I completed a program in Computer Science.
+            I liked programming so much I became a Team Lead at Lambda mentoring
+            and teaching students web development with React and Express.
           </p>
           <p>
             At the end of 2019 I joined SampleServe as a Frontend Engineer.
@@ -81,16 +79,20 @@ function About(props) {
           <section className="projects">
             <h3>Things I've built</h3>
             <p>
-              <strong>Sampleserve</strong> Project management tool for
-              environmental sampling. React web app with flask backend. Used
-              Redux and immutable.js for state management, SQLAlchemy and
-              Postgresql on the backend.
+              <strong>
+                <a href="https://www.sampleserve.com/">Sampleserve</a>
+              </strong>{" "}
+              Project management tool for environmental sampling. React web app
+              with flask backend. Used Redux and immutable.js for state
+              management, SQLAlchemy and Postgresql on the backend.
             </p>
             <p>
-              <strong>Tieme Ndo</strong> CMS to keep track of leads, loans, and
-              inventory. React web app with Java Spring Backend. Used Redux and
-              bootstrap on the frontend, Hibernate and Postgresql on the
-              backend.
+              <strong>
+                <a href="https://tiemendo-marketing.netlify.app/">Tieme Ndo</a>
+              </strong>{" "}
+              CMS to keep track of leads, loans, and inventory. React web app
+              with Java Spring Backend. Used Redux and bootstrap on the
+              frontend, Hibernate and Postgresql on the backend.
             </p>
             <p>
               <strong>BarHopper</strong> Directory style app with geolocation
@@ -120,11 +122,11 @@ function About(props) {
               and we should assume they act with the best intentions.
             </p>
             <p>
-              <strong>Together we are more </strong>
-              It's our job to uplift, empower, and include each other.
+              <strong>Together we are more.</strong> It's our job to uplift,
+              empower, and include each other.
             </p>
             <p>
-              <strong>Never stop learning </strong>
+              <strong>Never stop learning, </strong>
               because the world never stops changing.
             </p>
           </section>
@@ -209,9 +211,18 @@ const Main = styled.main`
   }
 
   strong {
-    color: var(--main-color);
     font-size: 1.8rem;
     font-weight: bold;
+
+    & > a {
+      color: var(--main-color);
+      font-size: inherit;
+      transition: all var(--snappy-transition);
+      &:hover {
+        text-decoration: none;
+        color: var(--secondary-color);
+      }
+    }
   }
 
   .about {
@@ -283,7 +294,7 @@ const Main = styled.main`
       /* border: 1px solid red; */
       height: 20vh;
       position: absolute;
-      top: -20vh;
+      top: -19.5vh;
       background: url("./images/wavybg.svg");
       background-size: 100% 100%;
       background-repeat: no-repeat;
