@@ -5,11 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "make-svgs": "node ./scripts/convert-img.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.4.4",
     "next": "9.4.4",
+    "node-fetch": "^2.6.0",
+    "prism-react-renderer": "^1.1.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-popper": "^2.2.3",

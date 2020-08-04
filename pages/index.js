@@ -116,17 +116,6 @@ const Main = styled.main`
     justify-content: center;
     align-items: flex-start;
     padding-top: 128px;
-
-    /* &:after {
-      content: "";
-      width: 100%;
-      height: 20vh;
-      position: absolute;
-      bottom: -4px;
-      background: url("./images/wavybg.svg");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-    } */
   }
 
   .details {
@@ -202,7 +191,7 @@ const Main = styled.main`
       height: 20vh;
       position: absolute;
       top: -19.5vh;
-      background: url("./images/wavybg.svg");
+      background: url("/images/wavybg.svg");
       background-size: 100% 100%;
       background-repeat: no-repeat;
     }
