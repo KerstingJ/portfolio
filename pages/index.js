@@ -4,7 +4,12 @@ import { withLayout } from "../layouts/withLayout";
 import IndexLayout from "../layouts/IndexLayout";
 import Link from "next/link";
 
-function About(props) {
+import glob from "fast-glob";
+import fs from "fs";
+import matter from "gray-matter";
+
+function About({ allMdx }) {
+  console.log(allMdx);
   return (
     <Main>
       <article className="about">
@@ -35,19 +40,19 @@ function About(props) {
       <div className="container">
         <article className="the-work">
           <h2>Check Out My Blog!</h2>
-          {[{}].map(({ title, link, short }, idx) => {
+          {allMdx.map(({ title, slug, description }, idx) => {
             return (
               <div className="post-card" key={title + idx}>
-                <Link href={"/about"}>
+                <Link href={`/blog/${slug}`}>
                   <a>
                     <h4>{title || "Post Title"}</h4>
                   </a>
                 </Link>
                 <p>
-                  {short ||
+                  {description ||
                     "What is this post all about, This is a placeholder."}
                 </p>
-                <Link href={link || "#"}>
+                <Link href={`/blog/${slug}`}>
                   <a>Read Post</a>
                 </Link>
               </div>
@@ -57,6 +62,30 @@ function About(props) {
       </div>
     </Main>
   );
+}
+
+export function getStaticProps() {
+  const files = glob.sync("blogs/*.mdx");
+
+  const allMdx = files.map((file) => {
+    const split = file.split("/");
+    const filename = split[split.length - 1];
+    const slug = filename.replace(".mdx", "");
+
+    const mdxSource = fs.readFileSync(file);
+    const { data } = matter(mdxSource);
+
+    return {
+      slug,
+      ...data,
+    };
+  });
+
+  return {
+    props: {
+      allMdx,
+    },
+  };
 }
 
 const Main = styled.main`

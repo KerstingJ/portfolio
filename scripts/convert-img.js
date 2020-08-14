@@ -48,16 +48,18 @@ let data = JSON.stringify({
 
 let imgId = "";
 
+// TODO set up dotenv package
+
 fetch("http://api.convertio.co/convert", { method: "post", body: data })
   .then((res) => res.json())
   .then((data) => {
-    fetch(`http://api.convertio.co/convert/${data.id}/dl`).then((res) => {
-      console.log(`receiving`);
-      new Promise((resolve, reject) => {
-        const dest = fs.createWriteStream(`./public/svgs/${converts[0]}.svg`);
-        res.body.pipe(dest);
-        res.body.on("end", () => resolve("it worked"));
-        dest.on("error", reject);
-      });
-    });
+    // fetch(`http://api.convertio.co/convert/${data.id}/dl`).then((res) => {
+    //   console.log(`receiving`);
+    //   new Promise((resolve, reject) => {
+    //     const dest = fs.createWriteStream(`./public/svgs/${converts[0]}.svg`);
+    //     res.body.pipe(dest);
+    //     res.body.on("end", () => resolve("it worked"));
+    //     dest.on("error", reject);
+    //   });
+    // });
   });
