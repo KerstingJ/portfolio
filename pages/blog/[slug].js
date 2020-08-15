@@ -5,11 +5,10 @@ import fs from "fs";
 import matter from "gray-matter";
 import glob from "fast-glob";
 import styled from "styled-components";
-
-import { Code, StableImage } from "../../components";
+import { Code, StableImage, TagBlock } from "../../components";
 import BlogLayout from "../../layouts/BlogLayout";
 
-const components = { code: Code };
+const components = { code: Code, TagBlock };
 
 export default function ({ mdxSource, frontMatter }) {
   const content = hydrate(mdxSource, components);
@@ -22,13 +21,15 @@ export default function ({ mdxSource, frontMatter }) {
           src={`/images/${frontMatter.imgSrc}`}
           alt={frontMatter.imgAlt}
         />
-        <span>
-          Photo by{" "}
-          <a href={frontMatter.imgAuthorLink}>{frontMatter.imgAuthor}</a> on
-          Unsplash
-        </span>
+        {frontMatter.isUnsplash && (
+          <span>
+            Photo by{" "}
+            <a href={frontMatter.imgAuthorLink}>{frontMatter.imgAuthor}</a> on
+            Unsplash
+          </span>
+        )}
       </BlogHeader>
-      {content}
+      <BlogContent>{content}</BlogContent>
     </BlogLayout>
   );
 }
@@ -85,4 +86,14 @@ export async function getStaticProps({ params: { slug } }) {
 
 const BlogHeader = styled.section`
   margin-bottom: 32px;
+`;
+
+const BlogContent = styled.section`
+  p {
+    margin-bottom: 16px;
+    text-indent: 4rem;
+  }
+  p + h3 {
+    margin-top: 32px;
+  }
 `;

@@ -1,0 +1,48 @@
+---
+title: Retrospective - Tieme Ndo
+tags: ["project"]
+author: Josh Kersting
+description: TiemeNdo is an organization out of Ghana that loans equipment to small farmers and business. They needed a way to keep track of their clients and organize their business. A team of 5 developers including myself built this application in 5 weeks.
+imgSrc: tiemeNdo.jpg
+imgAlt: screen shot of website
+date: 1562299200
+---
+
+#### Tech Stack
+
+<TagBlock
+  tags={[
+    "JAVA",
+    "SPRING",
+    "JAVASCRIPT",
+    "REACT",
+    "REDUX",
+    "HTML",
+    "CSS",
+    "HEROKU",
+    "POSTGRES",
+    "SQL",
+  ]}
+/>
+
+### About
+
+Tieme Ndo is an organization from Ghana that loans small farmers and retailers the supplies they need to run their businesses. When we first heard about this project Tieme Ndo staff had no formal way to keep track of records. They had notes written on paper and not much more than that. Our task was to create a client management system for Tieme Ndo that allowed them to keep track of their business. The CRM that we built lets them track clients, partner organizations, leads, loans given, installments paid, and their organizational inventory, as well as manage access to their database.
+
+### Stack
+
+On the front end of this project we created a single page application with client side routing using Javascript, React, and Redux. From my past experiences with CRM systems they are notoriously slow, choosing client side routing for this project allows our CRM to feel quick and responsive. The pairing of React and Redux allows us to easily manage a complex user interface, and the states that makes it possible. Java made a great choice for our back-end given its performance being a strictly typed and compiled language. This had the bonus effect that we were less likely to introduce bugs in the development process. That along with its matured libraries and ecosystem allowed us to create a RESTful API that will have the longevity a successful organization needs in its software.
+
+### Challenge
+
+This project offered many unique challenges some from architectural decisions, some from trying new things. The challenge I think was the most interesting happened 3 weeks into this project. The back-end had been built to over 90% functionality, we were about to shift our focus towards the front-end of the project, but needed some clarity on certain details of the application. I reached out to our point of contact and asked if we could meet to validate details and iron out any discrepancies. After talking with Jessica, it became clear the relationships between our models were less complex than we had originally believed. This was both a blessing and a curse.
+
+With our refined vision we had a clear path of what our application should be and the sinking realization that we may have not made a back-end that could support that application. Looking through the code we had more than enough functionality in our API to create the functionality we needed, if not extra. Unfortunately it would require some clever work on the front-end to get them to work seamlessly. After talking to the team, we had 2 choices, use the back end we had already built or create a new back-end. Rebuilding the back end would be a major time set back, but it would make the front-end work easier to implement. As a team we decided we couldn’t risk losing a week to rebuild the back end and needed to press on.
+
+The next week was rough, we had several models that were conceptually the same and appeared the same in our functionality but our API treated them as different entities. It became apparent that the code reusability we were depending on to save time was not possible. We were nowhere near our goal by the end of the week. I’ve never felt more defeated. As a team we had to take a step back, cut our project scope, and decide what realistically could be produced and passed off in the next 3 weeks. We cut out the statistics dashboard, and tracking of client production that could be turned into a gamified public interface. The decided focus points were code reusability, a clean UI, and creating a codebase we would be proud to show off and have live forever.
+
+Moving forward I didn’t want to make the same mistake we had previously made by building on an unfit API and took it upon myself to build a lean, mean, reusable version of our backend. I worked over the weekend so I could have a finished product to pitch on monday. I was able to reduce our 20+ models down to 10. I also found our design allowed our entire database to be returned by certain requests. I was able to fix this by implementing pages on endpoints that returned lists of data, and by excluding referenced entities from the serialization of models. To make these changes non-breaking to our current front-end I made changes to the repository and service layers to feed this data to our current endpoints. By combining models and making these changes to the back-end we were able to refactor the code we had already written on the front end to be used in multiple places putting the team ahead of schedule.
+
+### Next Steps
+
+The next steps for this application are to implement the statistics dashboard and productivity tracking features. This application would be great for the organizations staff but not so much for the clients of the organization, many of whom are illiterate. To bridge this gap I would implement an oratory interface that could call and remind clients of upcoming and past due payments. As well as allow them to see their standings in the scoreboard and direct them to Tieme Ndo staff.

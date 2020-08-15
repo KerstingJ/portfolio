@@ -1,0 +1,44 @@
+---
+title: Retrospective - Void Dungeon
+tags: ["project"]
+author: Josh Kersting
+description: Multi-user Dungeon with a horror theme, and full messaging system. Had to learn a new framework and navigate an inherited codebase to achieve MVP in 4 days.
+imgSrc: void.jpg
+imgAlt: screen shot of website showing dungeon map and chat
+date: 1564718400
+---
+
+#### Tech Stack
+
+<TagBlock
+  tags={[
+    "PYTHON",
+    "DJANGO",
+    "JAVASCRIPT",
+    "REACT",
+    "REDUX",
+    "CANVAS",
+    "HTML",
+    "CSS",
+  ]}
+/>
+
+### About
+
+Void dungeon is a multi-user dungeon that allows you to explore and interact with other users. Some applications you build to solve a problem, some you build just for fun. This project is the latter, with the added bonus of having some unique challenges to overcome. With an inherited back-end framed out with Python and Django, our team of 5 developers had 4 days to complete MVP on this project. MVP included goals of creating algorithms to efficiently create and render an “interesting” world, as well as our accomplished Stretch goal of implementing a chat feature using the web sockets library Pusher.
+
+### Stack
+
+To complete this project we used Javascript, React, Redux, Canvas Api, Python, Django, and Pusher. Even though the scope of this project was small enough to justify not using a state management tool like Redux on the front-end, it made sense to use it paired with React right from the start so there was no technical debt to refactor to them later, especially considering how complex game interfaces can become and that this is a project that would be fun to continue with later. Canvas made sense to use because it allows fine control over what is drawn on the screen and how. Python and Django were inherited through a partial back-end that allowed us to start with a partially built API, but had the tradeoff of having to learn and navigate an unfamiliar framework.
+
+### Challenge
+
+A challenge I faced on this project was implementing a graph like structure to represent the game world on the front-end. The two approaches that best facilitated our rendering were a two dimensional array, or a graph. A 2D array would be faster to implement but I chose a graph to be forward thinking. This game has a horror theme, part of horror is being chased, and graphs work well with path finding algorithms. Although I had limited knowledge of graphs, I did know it was similar to a tree structure with the added feature that nodes can create circular references. I created a node class that could be connected to the north, south, east, and west. The Api returned a list of unconnected rooms with references to the ids of their neighboring rooms sorted by ID.
+
+To create the graph, I iterated over the array saving the ID of the first node as a modifier and subtracting it from the id of the nodes referenced to match the room’s index with its ID. Now that my graph was constructed I had to traverse it. At first this seemed simple, I created a queue to hold the nodes that were waiting to be visited and used the first item in the received rooms array as my first graph node to start. As I visited each node I switched it’s boolean attribute “visited” to true and grabbed each of its neighbors and added them to the queue if they had not been previously visited and where not already in the queue. Here is where things got really fun.
+
+This seemed to work well at first, and only at first. With this current implementation I could only visit each node once! This definitely wouldn’t work to render the map, as I would need to re-render the map every time it was updated, and each room believed it had already been rendered. To solve this I created a random 12digit hex value to act as the key for each action. Now when I traversed the graph I wouldn’t check to see if the node had been “visited”, I checked to see if the ‘key’ of the last action performed on the node matched the ‘key’ of the action currently traversing the graph.
+
+### Next Steps
+
+This was a really fun project to work on, and if I worked on it more some of the next things I would implement are an inventory and health system, as well as monsters to fight, to give a user more things to do. As it stands, the game is more of a creative and spooky interface for some chat rooms. After that the next step would be to implement web workers to off-load some of the more process heavy things like path finding and rendering.

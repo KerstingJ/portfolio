@@ -1,0 +1,46 @@
+---
+title: Retrospective - Simple App
+tags: ["project"]
+author: Josh Kersting
+description: An application to connect local contractors to their clients. Allows contractors to interact with client with an upvote mechanism to have popular contractors show up on top. Built By myself on saturdays over the course of a month. Reactive front end built with React using Redux for state management. Back end API was built using Java and the spring framework.
+imgSrc: tiemeNdo.jpg
+imgAlt: screen shot of website
+date: 1559275200
+---
+
+#### Tech Stack
+
+<TagBlock
+  tags={[
+    "JAVA",
+    "SPRING",
+    "JAVASCRIPT",
+    "REACT",
+    "REDUX",
+    "SQL",
+    "HTML",
+    "CSS",
+  ]}
+/>
+
+### About
+
+Simple is a social marketplace for finding contractors. The idea is contractors not only perform services but work with clients to create art. The goal was to create a platform for contractors to post the artwork they create with reviews from the client they worked with and combine that with the ability for the community to vote on projects they think are the best. This project was started as an entry into the Pioneer.app X Lambda School competition for the possibility to win an \$18,000 learning stipend.
+
+### Stack
+
+On the frontend of this project I used React for the UI and Redux for state management and hosted my application on Netlify. React makes it easy to create reusable components and enforces the use of best practices like immutability and creating pure functions. React is built to be fast and scalable. It is also easy to debug due to its one way data flow where data passes from parent to child. Prop drilling can be a pain and state management can get messy so I decided to use Redux to help with state management on this application. As I said React only allows for parents to share data down to their children, Redux is really nice because it lets us wrap our application in a data provider that lets us pass state to components even if they are not directly descending from each other, freeing us up to create a cleaner codebase.
+
+On the backend of this application I created a RESTful API using Java and the Spring framework with a PostgreSQL database deployed on Heroku. This project was happening shortly before I started learning about Java and backend APIs at Lambda so I chose Java and Spring to get a head start on my classes. I chose to use a SQL backend, even though noSQL gives you the flexibility to scale and pivot in unique directions, because the clearly defined relationships and schema of SQL offered a better environment to debug.This was especially important given this project was being used to practice Spring. Heroku makes deploying and continuous integration really easy with Github and it plays nicely with Postgres so it was an easy choice to use Heroku with PostgreSQL as my SQL dialect.
+
+### Challenge
+
+I worked on this project during weekends over the course of a month. It brought the unique challenge of balancing the goals I set for myself with maintaining a heavy course load. I think even more challenging than finding that balance was trying to learn a new technology under that pressure. I had used Spring briefly several years prior, but with changes in spec and lack of practice, was left essentially starting from scratch.
+
+To get started I Immediately went to the official Spring page, Spring.io, and looked for the classic “Hello, World” tutorial to get me going. From this I was able to form a basic RESTful api and set up my main application and frame out my controllers pretty easily. At this point, I had the V and C from the MVC pattern, but this application wouldn’t work very well without the Models and some persistent data. I found the official spring documentation to be a great resource again, I was able to look up how to turn a plain ol Java object into an entity managed by spring data JPA. It was even easier than I remember, it felt like I could add a few annotations and things just worked.
+
+Now that my backend was set up I had to get the frontend of my application to pull data from the new API and refactor it to use that data instead of the dummy data I had been using. Setting up the new reducers and actions for this was trivial, I had them framed out before so all that needed to be done was adding the AJAX requests. The frontend was made to use data in the format of the dummy-data and using data straight from the request would break it. To make up for this I added a few data cleaning utilities that would take the data from the request and format it before adding it to the redux store.
+
+### Next Steps
+
+At the deadline of the competition my application had a solid UI and was reading data from my backend. The next steps for this application would be to get Authentication and write capabilities for users. One of the biggest lessons I learned from this project was more a lesson about business. I was blessed to have been able to compete along so many others around the world, not only building great applications, but building great organizations. The lesson I learned is the importance of users and their feedback. To see the people every week building applications around users, their needs, and the responses to their products was a humbling experience and peek into the reality of software development outside the scope of a fun hobby.
