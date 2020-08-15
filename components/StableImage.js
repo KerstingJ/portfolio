@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 
-// import { SvgImg } from "../components";
 import styled from "styled-components";
 
 /**

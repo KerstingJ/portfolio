@@ -250,7 +250,7 @@ const Main = styled.main`
 
     margin: 8px;
 
-    max-width: 750px;
+    max-width: 1000px;
 
     z-index: 1;
 
@@ -292,7 +292,7 @@ const Main = styled.main`
 
   .the-work {
     margin-bottom: 32px;
-    max-width: 750px;
+    max-width: 1000px;
     width: 100%;
     box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
 

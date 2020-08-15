@@ -148,7 +148,7 @@ const Main = styled.main`
 
     margin: 8px;
 
-    max-width: 750px;
+    max-width: 1000px;
 
     @media (max-width: 600px) {
       flex-direction: column;
@@ -216,7 +216,7 @@ const Main = styled.main`
 
   .the-work {
     margin-bottom: 32px;
-    max-width: 750px;
+    max-width: 1000px;
     width: 100%;
     box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.2);
 
@@ -298,4 +298,4 @@ const Main = styled.main`
   }
 `;
 
-export default withLayout(IndexLayout)(About);
+export default withLayout(IndexLayout)(Home);
