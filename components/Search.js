@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Fuse from "fuse.js";
 
 import styled from "styled-components";
 
-const TAG_LIST = ["react", "javascript", "html/css", "java"];
+const TAG_LIST = ["react", "javascript", "HTML/CSS", "java", "project"];
 
 const fuseOptions = {
   threshold: 0.35,
@@ -19,7 +19,7 @@ const fuseOptions = {
 export function Search({ blogs, handleFilter }) {
   const [searchValue, setSearchValue] = useState("");
   const [searchTags, setSearchTags] = useState([]);
-  const fuse = new Fuse(blogs, fuseOptions);
+  const fuse = useRef(new Fuse(blogs, fuseOptions));
 
   useEffect(() => {
     if (searchValue === "" && searchTags.length === 0) {
@@ -37,7 +37,7 @@ export function Search({ blogs, handleFilter }) {
           },
         ],
       };
-      const results = fuse.search(queries).map((result) => result.item);
+      const results = fuse.current.search(queries).map((result) => result.item);
       handleFilter(results);
     }
   }, [searchValue, searchTags]);
@@ -56,15 +56,65 @@ export function Search({ blogs, handleFilter }) {
   };
 
   return (
-    <section direction="column" w={["100%", "75%", "50%"]}>
-      <div justify="space-around">
+    <SearchSection>
+      <div className="tags-container" justify="space-around">
         {TAG_LIST.map((tag, index) => (
-          <button onClick={() => onTagClick(tag)} key={tag + index}>
-            #{tag}
+          <button
+            onClick={() => onTagClick(tag)}
+            key={tag + index}
+            className={searchTags.includes(tag) ? "selected" : undefined}
+          >
+            {tag}
           </button>
         ))}
       </div>
-      <input mt={6} value={searchValue} onChange={onChange} />
-    </section>
+      <input
+        mt={6}
+        value={searchValue}
+        onChange={onChange}
+        placeholder={`🔍 Use a custom filter`}
+      />
+    </SearchSection>
   );
 }
+
+const SearchSection = styled.section`
+  width: 100%;
+  padding-bottom: 32px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 32px;
+
+  input {
+    &:focus {
+      border: 1px solid var(--main-color);
+    }
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+
+    & > * {
+      margin-right: 16px;
+    }
+
+    button {
+      text-transform: capitalize;
+      background: none;
+      border: 1px solid lightgray;
+      color: gray;
+
+      &:hover {
+        border: 1px solid var(--main-color);
+        color: var(--main-color);
+      }
+
+      &.selected {
+        background: var(--main-color);
+        border: 1px solid var(--main-color);
+        color: white;
+      }
+    }
+  }
+`;

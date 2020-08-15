@@ -9,7 +9,6 @@ import fs from "fs";
 import matter from "gray-matter";
 
 function About({ allMdx }) {
-  console.log(allMdx);
   return (
     <Main>
       <article className="about">
@@ -44,7 +43,7 @@ function About({ allMdx }) {
             return (
               <div className="post-card" key={title + idx}>
                 <Link href={`/blog/${slug}`}>
-                  <a>
+                  <a className="title-link">
                     <h4>{title || "Post Title"}</h4>
                   </a>
                 </Link>
@@ -107,17 +106,6 @@ const Main = styled.main`
 
   h4 {
     font-size: 2rem;
-  }
-
-  a > h4 {
-    display: inline-block;
-    cursor: pointer;
-    transition: all var(--snappy-transition);
-
-    &:hover {
-      color: var(--secondary-color);
-      text-decoration: underline;
-    }
   }
 
   h6 {
@@ -250,6 +238,43 @@ const Main = styled.main`
   }
 
   .post-card {
+    margin-bottom: 32px;
+
+    a {
+      position: relative;
+
+      &:hover {
+        text-decoration: none;
+        color: var(--secondary-color);
+
+        &:after {
+          background: var(--secondary-color);
+          width: 100%;
+          left: 0;
+        }
+
+        &.title-link:after {
+          background: var(--main-color);
+        }
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        width: 1px;
+        height: 2px;
+        background: transparent;
+        transition: all var(--snappy-transition);
+      }
+    }
+
+    a > h4 {
+      display: inline-block;
+      border-radius: 2px;
+    }
+
     &:first-of-type {
       margin-top: 16px;
     }
@@ -258,8 +283,17 @@ const Main = styled.main`
       margin-bottom: 16px;
     }
 
+    h4 {
+      margin-bottom: 8px;
+    }
+
     p {
-      margin-bottom: 0;
+      margin-bottom: 8px;
+      color: gray;
+    }
+
+    a {
+      font-weight: 600;
     }
   }
 `;

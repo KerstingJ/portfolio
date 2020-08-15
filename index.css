@@ -1,7 +1,10 @@
 html {
+  /* So we dont have to do weird box-model math */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  overflow-y: scroll;
 
   font-size: 62.5%;
   --main-color: rgb(2, 121, 233);
@@ -83,9 +86,18 @@ button:focus {
 
 input,
 button {
-  padding: 10px;
+  transition: all var(--snappy-transition);
+  padding: 4px 16px;
   border-radius: 3px;
   border: 1px solid lightgray;
+}
+
+input {
+  padding: 8px 16px;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 input[type="date"] {

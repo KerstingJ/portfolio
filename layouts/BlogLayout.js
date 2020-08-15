@@ -66,7 +66,6 @@ const Main = styled.main`
   .container {
     position: relative;
     padding: 8px;
-    padding-top: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,7 +98,7 @@ const Main = styled.main`
 
     padding: 32px 64px;
 
-    margin-top: -65vh;
+    margin-top: calc(-80vh + 128px);
 
     z-index: 1;
 

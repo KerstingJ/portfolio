@@ -2,6 +2,8 @@ import React from "react";
 import glob from "fast-glob";
 import fs from "fs";
 import matter from "gray-matter";
+import styled from "styled-components";
+import Link from "next/link";
 
 import BlogLayout from "../../layouts/BlogLayout";
 
@@ -18,13 +20,29 @@ export default function Blogs({ allMdx }) {
 
   return (
     <BlogLayout>
-      <h2>This page is under construction</h2>
+      <h2>Welcome To My Blog!</h2>
+      <p>Take a look around, you can filter by keywords or your own criteria</p>
       <Search blogs={allMdx} handleFilter={handleFilter} />
-      <div className="results">
-        {filteredBlogs?.map((blog) => (
-          <div>{JSON.stringify(blog)}</div>
-        ))}
-      </div>
+      <ResultsContainer className="results">
+        {filteredBlogs.map(({ title, slug, description }, idx) => {
+          return (
+            <div className="post-card" key={title + idx}>
+              <Link href={`/blog/${slug}`}>
+                <a className="title-link">
+                  <h4>{title || "Post Title"}</h4>
+                </a>
+              </Link>
+              <p>
+                {description ||
+                  "What is this post all about, This is a placeholder."}
+              </p>
+              <Link href={`/blog/${slug}`}>
+                <a>Read Post</a>
+              </Link>
+            </div>
+          );
+        })}
+      </ResultsContainer>
     </BlogLayout>
   );
 }
@@ -52,3 +70,65 @@ export function getStaticProps() {
     },
   };
 }
+
+const ResultsContainer = styled.section`
+  a {
+    position: relative;
+
+    &:hover {
+      text-decoration: none;
+      color: var(--secondary-color);
+
+      &:after {
+        background: var(--secondary-color);
+        width: 100%;
+        left: 0;
+      }
+
+      &.title-link:after {
+        background: var(--main-color);
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 1px;
+      height: 2px;
+      background: transparent;
+      transition: all var(--snappy-transition);
+    }
+  }
+
+  a > h4 {
+    display: inline-block;
+    border-radius: 2px;
+  }
+
+  .post-card {
+    margin-bottom: 32px;
+
+    &:first-of-type {
+      margin-top: 16px;
+    }
+
+    &::last-of-type {
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      color: gray;
+    }
+
+    a {
+      font-weight: 600;
+    }
+  }
+`;
