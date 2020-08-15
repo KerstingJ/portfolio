@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
           ></link>
           <script
             src="https://kit.fontawesome.com/79b8b1addc.js"
-            crossorigin="anonymous"
+            crossOrigin="anonymous"
           ></script>
         </Head>
         <body>

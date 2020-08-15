@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 
+// import { SvgImg } from "../components";
+import styled from "styled-components";
+
 /**
  *
  * @param {String} src Source for your image
@@ -25,8 +28,17 @@ export function StableImage({ src, alt, ...rest }) {
 
   return (
     <>
-      {!isLoaded && <img src={svgSrc} alt={alt} {...rest} />}
-      <picture>
+      {!isLoaded && (
+        <SvgImg
+          style={{ fill: `var(--secondary-color)` }}
+          src={svgSrc}
+          alt={alt}
+          {...rest}
+        />
+      )}
+
+      {/* Position absolute is to get rid of a weird 20px space from picture even when empty */}
+      <picture style={!isLoaded ? { position: "absolute" } : {}}>
         {srcSets.map((rs) => {
           <source key={rs.src + rs.media} srcSet={rs.src} media={rs.media} />;
         })}
@@ -42,3 +54,7 @@ export function StableImage({ src, alt, ...rest }) {
     </>
   );
 }
+
+const SvgImg = styled.img`
+  filter: invert(100%) sepia() saturate(1100%) hue-rotate(285deg);
+`;
