@@ -97,6 +97,7 @@ const SearchSection = styled.section`
 
     & > * {
       margin-right: 16px;
+      margin-bottom: 16px;
     }
 
     button {

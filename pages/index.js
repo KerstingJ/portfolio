@@ -38,7 +38,7 @@ function Home({ allMdx }) {
 
       <div className="container">
         <article className="the-work">
-          <h2>Check Out My Blog!</h2>
+          <h2>Check Out My Latest Stuff</h2>
           {allMdx.map(({ title, slug, description }, idx) => {
             return (
               <div className="post-card" key={title + idx}>
@@ -66,7 +66,7 @@ function Home({ allMdx }) {
 export function getStaticProps() {
   const files = glob.sync("blogs/*.mdx");
 
-  const allMdx = files.map((file) => {
+  let allMdx = files.map((file) => {
     const split = file.split("/");
     const filename = split[split.length - 1];
     const slug = filename.replace(".mdx", "");
@@ -79,6 +79,9 @@ export function getStaticProps() {
       ...data,
     };
   });
+
+  // only the 5 newest posts on the index page
+  allMdx = allMdx.sort((a, b) => (a.date > b.date ? 1 : -1)).slice(0, 5);
 
   return {
     props: {

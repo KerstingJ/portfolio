@@ -48,7 +48,7 @@ export default function Blogs({ allMdx }) {
 export function getStaticProps() {
   const files = glob.sync("blogs/*.mdx");
 
-  const allMdx = files.map((file) => {
+  let allMdx = files.map((file) => {
     const split = file.split("/");
     const filename = split[split.length - 1];
     const slug = filename.replace(".mdx", "");
@@ -61,6 +61,8 @@ export function getStaticProps() {
       ...data,
     };
   });
+
+  allMdx = allMdx.sort((a, b) => (a.date > b.date ? 1 : -1));
 
   return {
     props: {

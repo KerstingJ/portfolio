@@ -48,17 +48,22 @@ function About(props) {
         <section className="details">
           <h3>Let me tell you about myself</h3>
           <p>
-            I spent most of my professional life traveling the Mid-South and
-            Mid-west helping grass-roots organizations manage data. We used to
-            spend days and weeks manually transcribing data from one system to
-            another. I taught myself python to automate the process and used my
-            time to focus on turning that data into actionable insights.
+            I am a father to a wonderful son, and partner to his beautiful
+            mother. When I'm not programming I like to spend time with my
+            family, going camping, doing photography, and playing video games.
           </p>
           <p>
-            After moving back to Michigan I joined Lambda School at the
-            beginning of 2019, where I completed a program in Computer Science.
-            I liked programming so much I became a Team Lead at Lambda mentoring
-            and teaching students web development with React and Express.
+            I spent the beginning of my professional life working with
+            grass-roots organizations managing data. We used to spend days and
+            weeks manually transcribing data from one system to another. I
+            taught myself python to automate the process and used my time to
+            focus on turning that data into actionable insights.
+          </p>
+          <p>
+            I liked programming so much, after moving back to Michigan, I joined
+            Lambda School. I completed their program in Computer Science and Web
+            Development and became a Team Lead helping students through the same
+            program.
           </p>
           <p>
             At the end of 2019 I joined SampleServe as a Frontend Engineer.
@@ -109,7 +114,11 @@ function About(props) {
               >
                 Lets talk
               </button>
-              to learn more about my experience
+              about my experience. You can also check out some of the project
+              retrospective on my
+              <Link href="/blog">
+                <a> blog.</a>
+              </Link>
             </p>
           </section>
         </article>
@@ -308,6 +317,38 @@ const Main = styled.main`
 
     @media (max-width: 500px) {
       padding: 8px 16px;
+    }
+
+    a {
+      position: relative;
+      font-weight: 600;
+      font-size: 1.8rem;
+
+      &:hover {
+        text-decoration: none;
+        color: var(--secondary-color);
+
+        &:after {
+          background: var(--secondary-color);
+          width: 100%;
+          left: 0;
+        }
+
+        &.title-link:after {
+          background: var(--main-color);
+        }
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        width: 1px;
+        height: 2px;
+        background: transparent;
+        transition: all var(--snappy-transition);
+      }
     }
   }
 
