@@ -41,6 +41,23 @@ export default class MyDocument extends Document {
             src="https://kit.fontawesome.com/79b8b1addc.js"
             crossOrigin="anonymous"
           ></script>
+          {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-136240788-1"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag("js", new Date());
+              gtag("config", "UA-136240788-1");
+            `,
+            }}
+          />
         </Head>
         <body>
           <Main />
