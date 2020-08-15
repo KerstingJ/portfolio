@@ -10,8 +10,6 @@ import BlogLayout from "../../layouts/BlogLayout";
 import { Search } from "../../components";
 
 export default function Blogs({ allMdx }) {
-  console.log({ allMdx });
-
   const [filteredBlogs, setFilteredBlogs] = React.useState(allMdx);
 
   const handleFilter = (data) => {

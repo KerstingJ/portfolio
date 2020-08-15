@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect, useMemo } from "react";
  *
  * @param {String} src Source for your image
  * @param {String} alt alt description for your image
- * @param {Array[Object]} responsiveSources an array of objects with src being img src and media being media query
  */
 export function StableImage({ src, alt, ...rest }) {
   const [imgElement, setImgElement] = useState(null);
@@ -26,7 +25,7 @@ export function StableImage({ src, alt, ...rest }) {
 
   return (
     <>
-      {!isLoaded && <img src={svgSrc} />}
+      {!isLoaded && <img src={svgSrc} alt={alt} {...rest} />}
       <picture>
         {srcSets.map((rs) => {
           <source key={rs.src + rs.media} srcSet={rs.src} media={rs.media} />;
@@ -37,6 +36,7 @@ export function StableImage({ src, alt, ...rest }) {
           style={!isLoaded ? { visibility: "hidden", height: 0 } : {}}
           ref={setImgElement}
           {...rest}
+          onLoad={() => setIsLoaded(true)}
         />
       </picture>
     </>

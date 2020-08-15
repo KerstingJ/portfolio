@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { withLayout } from "../layouts/withLayout";
-import IndexLayout from "../layouts/IndexLayout";
 import Link from "next/link";
-
 import glob from "fast-glob";
 import fs from "fs";
 import matter from "gray-matter";
 
-function About({ allMdx }) {
+import { withLayout } from "../layouts/withLayout";
+import IndexLayout from "../layouts/IndexLayout";
+
+function Home({ allMdx }) {
   return (
     <Main>
       <article className="about">
         <section className="details">
           <img
             className="profile-pic"
-            src="./images/me.jpg"
+            src="./images/me-small.jpg"
             alt="Handsome And Talented Software Developer"
           />
           <section className="details-content">
