@@ -1,0 +1,129 @@
+---
+title: Javascript Variables
+tags: ["javascript"]
+author: Josh Kersting
+description: An introduction to variables in a javascript environment.
+imgSrc: villages-sea.jpg
+imgAuthor: Mohit
+imgAuthorLink: https://unsplash.com/@98mohitkumar?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText
+imgAlt: arieal view of costal village
+date: 1597602615
+---
+
+### What's A Variable?
+
+A variable is just a name we use to refer to data in our program.
+JavaScript gives us 3 keywords to declare variables `var`, `let`, and `const`.
+
+```js
+let myVariable = "grapefruit";
+
+const myConstant = "banana";
+
+var myVar = "orange";
+```
+
+Other than the keywords we use, they dont seem so different,
+but each gives the name we use some unique characterisitics.
+
+### Variable scope
+
+All variables live within a scope, the area of the code where we can access them.
+`let` and `const` are block scoped. That means the varibles they create live in a
+specific block of code and don't leave it. `var` on the other hand is function scoped and will spread as
+far as it can inside a function. If it wasnt declared in a function it will spread
+through the entire program. `var` is older and isn't used as much because this
+behavior can lead to some "VARy" tricky bugs.
+
+```js
+// a block is as a section of code inside curly brackets
+// sometimes it has a guard like if, else, or while
+// sometimes there is no guard
+if (true) {
+  // these only exist inside the if block
+  let a = "a";
+  const b = "b";
+
+  // this is declared globally
+  var c = "c";
+}
+
+// var ignores block scope
+// so we can use it here
+c = "sea";
+console.log(c);
+
+// let and const stay in their house
+// we cant use them out here
+console.log(a, b);
+
+// a function is the only guard that can keep a var inside
+function someFunc() {
+  var d = "d";
+}
+
+// this doesnt work because d was prevented from escaping
+// by the function keyword
+console.log(d);
+```
+
+Another thing that makes `var` tricky is you can redeclare it.
+That means you can accidentally overwrite a variable when you dont mean to.
+
+```js
+let cat = "cute";
+var kitten = "cuter";
+const dog = "cutest";
+
+// this is allowed by js
+var kitten = "fluffy";
+
+// these will cause errors
+let cat = "soft";
+const dog = "cuddly";
+```
+
+### Variable Reassignment
+
+`let` and `var` are very similar in that, besides their scope, they act the same.
+You can reuse the names and assign new values to them as much as you want.
+`const` on the other hand is a one time assignment.
+
+`const` is short for constant and semantically means the value held by this variable should not change.
+Notice I say "Should Not". In JavaScript data types can be `primitive`, meaning we pass around the actual value,
+or `reference` types where we pass the address that tells us where the value lives.
+Numbers, Booleans, and Strings are examples of `primitive` types.
+Arrays and Objects are examples of `reference` types.
+
+Used with primitive values `const` acts how you would expect. When you assign a Number
+to a constant variable you can't change it. the constant will always be that value.
+When you use it with a reference value it always points to that reference. `const`
+points us to an address that always get us to the right house, but we have no way to
+be sure someone hasn't moved all the furniture around.
+That means if you assign an array to a constant it will always point to the same array,
+but it doesnt prevent the contents of the array from changing.
+
+```js
+// we can reassign the variables we create with let
+let taco = "delicious";
+taco = "my favorite"; // notice we dont use `let` to reassign a value
+
+// const can not be reassigned
+const howManyTacosICanEat = 5;
+howManyTacosICanEact = 100;
+
+// we cant assign a new value, but because its a reference
+// data type we can change the data that it holds
+const favoriteKindsOfTacos = ["beef", "chicken"];
+favoriteKindsOfTacos.push("steak");
+```
+
+### Summary
+
+Javscript lets you declare 3 types of varibles, `var`, `let`, and `const`.
+`var` has some quirks with scope and reassignment, and it isn't used much anymore.
+`let` and `const` are block scoped. `let` is a variable you can reassign and
+`const` is a variable you dont want to change.
+
+Thanks for reading my article on Variables in Javascript.
+I hope it's been helpful and can't wait to share my next article with you!
