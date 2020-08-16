@@ -19,7 +19,9 @@ export default function Blogs({ allMdx }) {
   return (
     <BlogLayout>
       <h2>Welcome To My Blog!</h2>
-      <p>Take a look around, you can filter by keywords or your own criteria</p>
+      <p>
+        Take a look around, you can filter by keywords to find articles faster.
+      </p>
       <Search blogs={allMdx} handleFilter={handleFilter} />
       <ResultsContainer className="results">
         {filteredBlogs.map(({ title, slug, description }, idx) => {
@@ -62,7 +64,7 @@ export function getStaticProps() {
     };
   });
 
-  allMdx = allMdx.sort((a, b) => (a.date > b.date ? 1 : -1));
+  allMdx = allMdx.sort((a, b) => (a.date < b.date ? 1 : -1));
 
   return {
     props: {

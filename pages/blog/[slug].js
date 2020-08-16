@@ -91,7 +91,6 @@ const BlogHeader = styled.section`
 const BlogContent = styled.section`
   p {
     margin-bottom: 16px;
-    text-indent: 4rem;
   }
   p + h3 {
     margin-top: 32px;

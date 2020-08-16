@@ -1,9 +1,16 @@
 import Highlight, { defaultProps } from "prism-react-renderer";
+import synthwave84 from "prism-react-renderer/themes/synthwave84";
+import nightOwl from "prism-react-renderer/themes/nightOwl";
 
 export function Code({ children, className }) {
   const language = className.replace(/language-/, "");
   return (
-    <Highlight {...defaultProps} code={children.trim()} language={language}>
+    <Highlight
+      {...defaultProps}
+      code={children.trim()}
+      language={language}
+      theme={synthwave84}
+    >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
           className={className}

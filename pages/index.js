@@ -81,7 +81,7 @@ export function getStaticProps() {
   });
 
   // only the 5 newest posts on the index page
-  allMdx = allMdx.sort((a, b) => (a.date > b.date ? 1 : -1)).slice(0, 5);
+  allMdx = allMdx.sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 5);
 
   return {
     props: {

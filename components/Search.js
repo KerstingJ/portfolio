@@ -3,7 +3,7 @@ import Fuse from "fuse.js";
 
 import styled from "styled-components";
 
-const TAG_LIST = ["react", "javascript", "HTML/CSS", "java", "project"];
+const TAG_LIST = ["javascript", "project"];
 
 const fuseOptions = {
   threshold: 0.35,
@@ -68,12 +68,12 @@ export function Search({ blogs, handleFilter }) {
           </button>
         ))}
       </div>
-      <input
+      {/* <input
         mt={6}
         value={searchValue}
         onChange={onChange}
         placeholder={`🔍 Use a custom filter`}
-      />
+      /> */}
     </SearchSection>
   );
 }
@@ -93,7 +93,8 @@ const SearchSection = styled.section`
   .tags-container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 32px;
+    /* only commented out, will need when we bring search back */
+    /* margin-bottom: 32px; */
 
     & > * {
       margin-right: 16px;
