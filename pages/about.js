@@ -50,7 +50,7 @@ function About(props) {
           <p>
             I am a father to a wonderful son, and partner to his beautiful
             mother. When I'm not programming I like to spend time with my
-            family, going camping, doing photography, and playing video games.
+            family, cooking, camping, and playing video games.
           </p>
           <p>
             I spent the beginning of my professional life working with
