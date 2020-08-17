@@ -1,8 +1,8 @@
 export function conway() {
   let frameId = null;
   let runSimulation = false;
-  let size = 125; // the weird unit leaves lines that I think look cool
-  let canvasSize = 500;
+  let size = 100; // the weird unit leaves lines that I think look cool
+  let canvasSize = 300;
   let adjust = canvasSize / size;
   let count = 0;
   let state = null;

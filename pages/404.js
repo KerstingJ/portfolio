@@ -37,11 +37,8 @@ export default function PageNotFound(props) {
         <h2>404</h2>
         <h4>We couldn't find that page</h4>
         <p></p>
-        <p>
-          But we did find this, have some fun with Conways Game of Life.
-          <br /> You can draw inside the universe to add your own twist
-        </p>
-        <canvas width="500px" height="500px"></canvas>
+        <p>But we did find this, have some fun with Conways Game of Life.</p>
+        <canvas width="300px" height="300px"></canvas>
         <div class="status">
           <p>
             Iterations: <span id="count">0</span>
