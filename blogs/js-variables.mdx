@@ -15,7 +15,7 @@ date: 1597602615
 A variable is just a name we use to refer to data in our program.
 JavaScript gives us 3 keywords to declare variables `var`, `let`, and `const`.
 
-```js
+```javascript
 let myVariable = "grapefruit";
 
 const myConstant = "banana";
@@ -35,7 +35,7 @@ far as it can inside a function. If it wasnt declared in a function it will spre
 through the entire program. `var` is older and isn't used as much because this
 behavior can lead to some "VARy" tricky bugs.
 
-```js
+```javascript
 // a block is as a section of code inside curly brackets
 // sometimes it has a guard like if, else, or while
 // sometimes there is no guard
@@ -70,7 +70,7 @@ console.log(d);
 Another thing that makes `var` tricky is you can redeclare it.
 That means you can accidentally overwrite a variable when you dont mean to.
 
-```js
+```javascript
 let cat = "cute";
 var kitten = "cuter";
 const dog = "cutest";
@@ -103,14 +103,14 @@ be sure someone hasn't moved all the furniture around.
 That means if you assign an array to a constant it will always point to the same array,
 but it doesnt prevent the contents of the array from changing.
 
-```js
+```javascript
 // we can reassign the variables we create with let
 let taco = "delicious";
 taco = "my favorite"; // notice we dont use `let` to reassign a value
 
 // const can not be reassigned
 const howManyTacosICanEat = 5;
-howManyTacosICanEact = 100;
+howManyTacosICanEat = 100;
 
 // we cant assign a new value, but because its a reference
 // data type we can change the data that it holds
