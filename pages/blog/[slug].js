@@ -20,6 +20,7 @@ export default function ({ mdxSource, frontMatter }) {
         <StableImage
           src={`/images/${frontMatter.imgSrc}`}
           alt={frontMatter.imgAlt}
+          className="banner-image"
         />
         {frontMatter.isUnsplash && (
           <span>
@@ -86,13 +87,54 @@ export async function getStaticProps({ params: { slug } }) {
 
 const BlogHeader = styled.section`
   margin-bottom: 32px;
+
+  .banner-image {
+    max-height: 400px;
+    object-fit: cover;
+  }
 `;
 
 const BlogContent = styled.section`
   p {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  pre {
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
   p + h3 {
-    margin-top: 32px;
+    margin-top: 64px;
+  }
+
+  a {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: none;
+      color: var(--secondary-color);
+
+      &:after {
+        background: var(--secondary-color);
+        width: 100%;
+        left: 0;
+      }
+
+      &.title-link:after {
+        background: var(--main-color);
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 1px;
+      height: 2px;
+      background: transparent;
+      transition: all var(--snappy-transition);
+    }
   }
 `;

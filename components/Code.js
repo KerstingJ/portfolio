@@ -2,6 +2,14 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import synthwave84 from "prism-react-renderer/themes/synthwave84";
 import nightOwl from "prism-react-renderer/themes/nightOwl";
 
+synthwave84.styles.push({
+  types: ["comment", "block-comment", "prolog", "doctype", "cdata"],
+  style: {
+    color: "#a5b0f0", //"#8e9ced",
+    fontStyle: "italic",
+  },
+});
+
 export function Code({ children, className }) {
   const language = className.replace(/language-/, "");
   return (
