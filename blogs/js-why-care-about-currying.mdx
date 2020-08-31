@@ -1,0 +1,376 @@
+---
+title: Why Should I Care About Currying?
+tags: ["javascript"]
+author: Josh Kersting
+description: Learn about currying with practical examples.
+imgSrc: stamp-collection.jpg
+imgAuthor: Allie
+imgAuthorLink: https://unsplash.com/@wordsmithmedia?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText
+imgAlt: collection of stamps
+date: 1598731805
+---
+
+### What is Currying
+
+Currying comes from mathmatics. It is the transformation of a function that takes multiple
+arguments into a function that takes only one argument that returns a function that
+takes then next argument in line repeated until it can return a result.
+
+It just means instead of passing all the arguments to a function at once, and getting a result, you can `apply`
+some of the arguments to a function and get back a function that takes the rest of the arguments.
+
+That means turning a function like `add2Numbers` into `curriedAdd2Numbers` as shown below.
+
+```javascript
+function add2Numbers(x, y) {
+  return x + y;
+}
+let six = add2Numbers(2, 4);
+
+const curriedAdd2Numbers = (x) => (y) => x + y;
+let five = curriedAdd2Numbers(2)(3);
+```
+
+If you're like me you see the example above and think "Why would I do that?". It doesn't seem so useful.
+I'll admit with the example of adding numbers it isn't, but currying is a powerful tool to add to your belt.
+
+My goal is to explain currying in an aproachable way.
+That by the end of this you can see currying as a useful tool and be able to use it in your own code. Maybe you'll
+even be excited enough about it to dig further into currying and functional programming.
+
+The power of currying comes from partial application paired with JavaScripts ability to
+pass functions as arguments.
+
+For us that means 2 things. We can capture functions with some arguments already applied to create more
+specialized reusable functions and we can apply arguments to our functions as we pass
+them around until we have everything we need to call them.
+
+### Partial application
+
+Currying let's us take a generic function apply a few arguments and capture the result.
+This is nice when you find your self passing the same arguments to a function over and over.
+
+A prime example of this is a logging function with levels. In our example we have a logger that
+takes a level and a message. During runtime it checks the level of the message with the level of
+our global setting to determine wether it should show the message.
+
+```javascript
+const GLOBAL_DEBUG_LEVEL = "warning";
+const LEVELS_RANK = {
+  error: 1,
+  warning: 2,
+  info: 3,
+  debug: 4,
+};
+
+function logger(level, message) {
+  if (LEVELS_RANK[level] <= LEVELS_RANK[GLOBAL_DEBUG_LEVEL]) {
+    console.log(`${level}: ${message}`);
+  }
+}
+
+logger("info", "this seems like a bad idea");
+logger("warning", "you should probably stop");
+logger("warming", "why are you like this 😢");
+logger("error", "I don't want to say I told you so, but...");
+```
+
+By currying our logging function, and applying the level, we can create some
+sweet specialized logging functions and save ourselves from a possibly hard to find typo.
+
+```javascript
+// by currying on the go we can get around functions where we might
+// not have access to change the order of the arguments, or don't want to
+const logError = (message) => logger("error", message);
+logError("oops, forgot to declare it");
+
+// we could pass the message first if
+// for some reason we knew our message but not what level it should be
+// This isn't very clear what we're logging
+// But it does show that its something we could do if we wanted
+const logMessage = (level) => logger(level, `check our my sweet variable`);
+logMessage("debug");
+
+// this is a function that transforms a normal function
+// into a curried function that accepts 1 or more arguments at a time
+// until it has enough arguments to invoke the function it was given
+//
+// order of the arguments is important in this implementation
+function curry(func) {
+  return function currier(...args) {
+    // if we have all of our args lets call our function
+    if (args.length >= func.length) {
+      return func(...args);
+    }
+
+    // if not lets add a wrapper that can take more arguments
+    return (...moreArgs) => currier(...args, ...moreArgs);
+  };
+}
+
+// curriedLogger(level)(message)
+const curriedLogger = curry(logger);
+// we apply our level
+logInfo = curriedLogger("info");
+logWarning = curriedLogger("warning");
+
+// apply our message, and complete the function call
+logInfo(
+  "because of our implementation we can pass all the arguments if we wanted too"
+);
+
+curriedLogger("info", "This would act just like the original function");
+```
+
+Technically currying means we should be passing one argument at a time, but let's call it
+a suggestion. In Javascript there is nothing stopping us from applying more than
+one argument at a time as long as we call them in the right order. We can even bend the rules
+on argument order by wrapping our logger as we go in a function that takes the missing arguments.
+
+### Curry kind of like courier
+
+I can't help but think about a curried function as a courier.
+Each time a curried function is called it is like it stopped to pick up a package. When
+the truck is full and it has everything it needs it can deliver.
+
+```javascript
+let deliver = console.log;
+
+// courier needs to pick up 3 packages before they can deliver
+const courier = (packageA) => (packageB) => (packageC) =>
+  deliver(`${packageA}, ${packageB}, ${packageC}`);
+
+function doRoute(courier) {
+  // each package is only available in the scope of it's post office
+  // The Courier Starts at the state post office
+  statePost(courier);
+}
+
+function statePost(courier) {
+  // This package is only available inside the state post office
+  let package = "Nintendo Switch";
+  // the courier picks up the package
+  let courierWithOnePackage = courier(package);
+  // then goes to the next stop
+  countyPost(courierWithOnePackage);
+}
+
+function countyPost(courier) {
+  // This package is only available inside the county post office
+  let package = "Animal Crossing";
+  // the courier picks up the package
+  let courierWith2Packages = courier(package);
+  // then goes to the next stop
+  localPost(courierWith2Packages);
+}
+
+function localPost(courier) {
+  // This package is only available inside the county post office
+  let package = "Letter from Mom";
+  // the courier picks up the final package and can finally deliver
+  courier(package);
+}
+
+doRoute(courier);
+```
+
+In no one place was our courier able to pick up all of the packages at once. Every time they
+passed into a new post office they were able to grab the package from that location. When we had
+all the packages we were finally able to invoke the deliver function.
+
+Let's expand on this concept even further by checking out a grocery list app.
+
+we'll have a class called `GroceryListUI` that calls 2 other functions, `createItemRowWithQuantity`
+and `createQuantityForm`, to build our grocery list app.
+
+We want to keep our api logic in the `GroceryListUI` class to make our other functions more
+reusable. Maybe `createQuantityForm` and `createItemRowWithQuantity` live in other files and are reused
+in parts of our app to handle quantity of items we have in our pantry, or items being transported.
+
+Let's look at our components individually, then all together with only the code that deals with currying.
+
+First we have a class called `GroceryListUI` that takes an element
+and a list of grocery items. It calls the other functions to build
+the UI and attach it to the DOM.
+
+```javascript
+// creates our grocery list ui and attached it to the item passed
+class GroceryListUI {
+  constructor(element, items) {
+    // element we attach our list to
+    this.element = element;
+    this.element.append(...this.makeGroceryList(items));
+  }
+
+  // iterates over our list of items and turns it into a list of dom elements
+  makeGroceryList(items) {
+    // map over the list of items and create the elements for each one
+    return items.map((item) =>
+      // our next function
+      createItemRowWithQuantity(item, this.updateItemQuantity)
+    );
+  }
+
+  // curried API call where we need a function that hits an item endpoint,
+  // and id of what item to update, and the value we want to update
+  curriedApiCall = (apiCall) => (itemId) => (valueChangeEvent) => {
+    let newValue = valueChangeEvent.target.value;
+    apiCall(itemId, newValue);
+  };
+
+  // applying our first argument to create a specialized function
+  // for updating item Quantity
+  updateItemQuantity = this.curriedApiCall(putToItemQuantityEndpoint);
+
+  // if we wanted to add a feature to change the name of our item we can
+  // easily extend our curriedApiCall to do it
+  updateItemName = this.curriedApiCall(putToItemNameEndpoint);
+}
+```
+
+We have a function called `createItemRowWithQuantity` that takes a grocery item object
+and a function that calls our curried update function. It returns an element that well use as a
+row in our grocery list with the item name and a form to update the quantity.
+
+```javascript
+// takes a single object called item, and a function used to update an item.
+// returns an element that represents a row in our grocery list with a form inside it.
+function createItemRowWithQuantity(item, updateItemQuantity) {
+  // create row
+  let element = document.createElement("div");
+
+  // add the grocery item name so we know what we need
+  let name = document.createElement("h2");
+  name.textContent = item.name;
+
+  // apply the item Id so we know what Item to update
+  let updateThisItem = updateItemQuantity(item.id);
+
+  // use the quantity and callback function to create our little form
+  let form = createQuantityForm(item.quantity, updateThisItem);
+
+  // attach our new elements and send back our grocery item
+  element.append(name, form);
+  return element;
+}
+```
+
+`createQuantityForm` takes an initial quantity value and our update function. It returns a small form element
+
+```javascript
+// takes a Number Quantity and a callback function
+// returns a simple form with an input that holds an initial value.
+function createQuantityForm(quantity, updateThisItemsQuantity) {
+  // Create our form
+  let form = document.createElement("form");
+
+  // create the label for our input
+  let label = document.createElement("label");
+  label.textContent = "quantity";
+
+  // create our input
+  let input = document.createElement("input");
+  // pass our input the value from our database
+  input.value = quantity;
+  // attach a listener that will invoke our callback function
+  // when the input value changes and the input loses focus
+  input.addEventListener("change", updateThisItemsQuantity);
+
+  // put our pieces together and send them back
+  label.append(input);
+  form.append(label);
+  return form;
+}
+```
+
+You may have noticed `GroceryListUI` doesn't know what item will need to be updated, or what
+the updated value is, but it does know what function to call to hit our endpoint
+and update the item in the database. The element returned from `createItemRowWithQuantity` knows
+what item is going to be updated, and the form returned from `createQuantityForm`
+knows what the new value is. Sounds like a great time for our courier 😉
+
+All together now.
+
+you can also see a working example on [this codepen](https://codepen.io/KerstingJosh/pen/VwammPJ?editors=0011)
+
+```javascript
+class GroceryListUI {
+  // ...
+
+  // curried API call where we need a function that hits an item endpoint,
+  // and id of what item to update, and the value we want to update
+  curriedApiCall = (apiCall) => (itemId) => (valueChangeEvent) => {
+    let newValue = valueChangeEvent.target.value;
+    apiCall(itemId, newValue);
+  };
+
+  // lets do our first application and create a specialized function
+  // for updating item Quantity
+  updateItemQuantity = this.curriedApiCall(putToItemQuantityEndpoint);
+
+  // if we wanted to add a feature to change the name of our item we can
+  // easily extend our curriedApiCall to do it
+  updateItemName = this.curriedApiCall(putToItemNameEndpoint);
+
+  makeGroceryList(items) {
+    // map over the list of items and create the elements for each one
+    return items.map((item) =>
+      // this arrow function calls our create function and passes the
+      // partially applied function updateItemQuantity
+      createItemRowWithQuantity(item, this.updateItemQuantity)
+    );
+  }
+}
+
+function createItemRowWithQuantity(item, updateItemQuantity) {
+  // ...
+
+  // now apply the item Id and create a function specialized
+  // for updating this specific item
+  let updateThisItemsQuantity = updateItemQuantity(item.id);
+
+  // use the quantity and updateThisItemsQuantity as callback function to create our form
+  let form = createQuantityForm(item.quantity, updateThisItemsQuantity);
+
+  // ...
+}
+
+function createQuantityForm(quantity, updateThisItemsQuantity) {
+  // ...
+
+  // our paritally applied function now knows what endpoint to hit,
+  // what item to update. when this event listener fires it will
+  // get the new value and complete our function call
+  input.addEventListener("change", updateThisItemsQuantity);
+
+  // ...
+}
+```
+
+In our class we started with a curried function called `curriedApiCall` as our base.
+We only knew what action to call so we applied `putToItemQuantityEndpoint` and captured
+its value to create `updateItemQuantity`.
+
+Next, like our courier, our curried function is passed into `createItemRowWithQuantity`.
+In this function our list of items has been narrowed down to 1 item, so we can apply its
+id and create a function called `updateThisItem`.
+
+We pass `updateThisItem` into `createQuantityForm` where it's used as a
+callback function to our inputs event listener.
+
+Now when we update our values in the grocery list the event listener is called and applies
+our final argument, the new value, to our curried function. With that the function is
+fully applied and we update our database!
+
+### Summary
+
+Currying is an incredibly useful technique you can start using right away. It let's you create reusable functions,
+and capture arguments as a curried function is passed into the scope of other functions.
+
+Thanks for taking the time to read my article!
+
+If you want to dig deeper here are some places to go next.
+
+[Article by Eric Elliot on currying and function composition](https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983)
+
+[Javascript.Info reference on currying](https://javascript.info/currying-partials)
