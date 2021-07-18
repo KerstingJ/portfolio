@@ -24,8 +24,8 @@ function Home({ allMdx }) {
               I like solving hard problems with cool people.
             </h3>
             <p>
-              I build web and mobile applications as Frontend Engineer at
-              Sampleserve, and as a Freelance Developer.
+              I build web applications as Frontend Engineer at Politech, and as
+              a Freelance Developer.
             </p>
             <p>
               I've spent the last 2 years working extensively with React and

@@ -66,11 +66,14 @@ function About(props) {
             program.
           </p>
           <p>
-            At the end of 2019 I joined SampleServe as a Frontend Engineer.
-            Since then I have been working with React and React-native building
-            out features on our web and mobile apps. I've focused on reducing
+            At the end of 2019 I joined SampleServe as a Frontend Engineer,
+            where I worked with React and React Native. I focused on reducing
             bugs and improving code quality by adding automated linting,
             formatting, and testing.
+          </p>
+          <p>
+            In the beginning of 2021 I left SampleServe and Joined Politech as a
+            Frontend Engineer.
           </p>
           <p>
             I also develop web and mobile applications as a Freelance Developer.
