@@ -39,12 +39,12 @@ export default function PageNotFound(props) {
         <p></p>
         <p>But we did find this, have some fun with Conways Game of Life.</p>
         <canvas width="300px" height="300px"></canvas>
-        <div class="status">
+        <div className="status">
           <p>
             Iterations: <span id="count">0</span>
           </p>
         </div>
-        <div class="actions">
+        <div className="actions">
           <button
             id="toggle"
             className={isRunning ? "running" : ""}

@@ -1,18 +1,17 @@
 import React from "react";
-import renderToString from "next-mdx-remote/render-to-string";
-import hydrate from "next-mdx-remote/hydrate";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
 import fs from "fs";
 import matter from "gray-matter";
 import glob from "fast-glob";
 import styled from "styled-components";
 import { Code, StableImage, TagBlock } from "../../components";
 import BlogLayout from "../../layouts/BlogLayout";
+import useHasMounted from "../../hooks/useHasMounted";
 
-const components = { code: Code, TagBlock };
+const components = { pre: Code, TagBlock };
 
 export default function ({ mdxSource, frontMatter }) {
-  const content = hydrate(mdxSource, components);
-
   return (
     <BlogLayout>
       <BlogHeader>
@@ -30,7 +29,9 @@ export default function ({ mdxSource, frontMatter }) {
           </span>
         )}
       </BlogHeader>
-      <BlogContent>{content}</BlogContent>
+      <BlogContent>
+        <MDXRemote {...mdxSource} components={components} lazy />
+      </BlogContent>
     </BlogLayout>
   );
 }
@@ -75,7 +76,7 @@ export async function getStaticProps({ params: { slug } }) {
     console.warn("No MDX file found for slug");
   }
 
-  const mdx = await renderToString(content, components, null, data);
+  const mdx = await serialize(content, { parseFrontmatter: true, scope: data });
 
   return {
     props: {

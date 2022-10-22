@@ -10,12 +10,14 @@ synthwave84.styles.push({
   },
 });
 
-export function Code({ children, className }) {
-  const language = className.replace(/language-/, "");
+export function Code({ children }) {
+  if (!children) return;
+  const language = children.props.className.replace(/language-/, "");
+
   return (
     <Highlight
       {...defaultProps}
-      code={children.trim()}
+      code={children.props.children.trim()}
       language={language}
       theme={synthwave84}
     >

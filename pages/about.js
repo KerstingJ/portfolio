@@ -48,16 +48,19 @@ function About(props) {
         <section className="details">
           <h3>Let me tell you about myself</h3>
           <p>
-            I am a father to a wonderful son, and partner to his beautiful
-            mother. When I'm not programming I like to spend time with my
-            family, cooking, camping, and playing video games.
+            I have 2 beautiful sons, and am partnered to their beautiful mother.
+            When I'm not programming I like to spend time with my family,
+            cooking, camping, and playing video games. Lately I've gotten
+            especially into smoking and baking.
           </p>
           <p>
             I spent the beginning of my professional life working with
-            grass-roots organizations managing data. We used to spend days and
-            weeks manually transcribing data from one system to another. I
-            taught myself python to automate the process and used my time to
-            focus on turning that data into actionable insights.
+            grass-roots organizations managing data. These organizations used
+            everything from google sheets and excel docs to dedicated data
+            management systems. We used to spend days and weeks manually
+            transcribing data from one system to another. I taught myself python
+            to automate the process and used my time to focus on turning that
+            data into actionable insights.
           </p>
           <p>
             I liked programming so much, after moving back to Michigan, I joined
@@ -67,13 +70,13 @@ function About(props) {
           </p>
           <p>
             At the end of 2019 I joined SampleServe as a Frontend Engineer,
-            where I worked with React and React Native. I focused on reducing
-            bugs and improving code quality by adding automated linting,
-            formatting, and testing.
+            where I worked with React and React Native. I built out core
+            application features and focused on reducing bugs and improving code
+            quality by adding automated linting, formatting, and testing.
           </p>
           <p>
-            In the beginning of 2021 I left SampleServe and Joined Politech as a
-            Frontend Engineer.
+            Since the beginning of 2021 I've worked at Politech as a Frontend
+            Engineer.
           </p>
           <p>
             I also develop web and mobile applications as a Freelance Developer.
@@ -86,6 +89,14 @@ function About(props) {
         <article className="the-work">
           <section className="projects">
             <h3>Things I've built</h3>
+            <p>
+              <strong>
+                <a href="https://blocks.app/">Blocks</a>
+              </strong>{" "}
+              Political advocacy tool for community organizing, with features to
+              support collection of voter registrations, petitions, phone
+              banking, and more! React web app with ruby and elixir back end.
+            </p>
             <p>
               <strong>
                 <a href="https://www.sampleserve.com/">Sampleserve</a>
@@ -103,12 +114,6 @@ function About(props) {
               frontend, Hibernate and Postgresql on the backend.
             </p>
             <p>
-              <strong>BarHopper</strong> Directory style app with geolocation
-              and social features. Consumer facing React-Native mobile app,
-              administrative web app with React, and a firebase serverless
-              Backend.
-            </p>
-            <p>
               And More!
               <button
                 ref={setReferenceElement}
@@ -117,8 +122,8 @@ function About(props) {
               >
                 Lets talk
               </button>
-              about my experience. You can also check out some of the project
-              retrospective on my
+              about my experience. You can also get a better idea of how I think
+              about code by reading through articles on my
               <Link href="/blog">
                 <a> blog.</a>
               </Link>

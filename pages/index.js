@@ -28,9 +28,9 @@ function Home({ allMdx }) {
               a Freelance Developer.
             </p>
             <p>
-              I've spent the last 2 years working extensively with React and
-              other Frontend technologies, on top of serverless and RESTful
-              apis.
+              I've spent my software career working extensively with React and
+              other Frontend technologies, as well as the serverless and RESTful
+              apis that support them.
             </p>
           </section>
         </section>

@@ -25,11 +25,14 @@ export default function _Footer(props) {
         </section>
         <section className="brief">
           <p>
-            Josh has spent the last year working extensively with React, React
-            Native, Redux, and other Frontend technologies, as well as Python,
-            Node, and Java backends. He has Built web and mobile applications as
-            Frontend Engineer at Sampleserve, and mentored students through
-            Lambda Schools full stack web development curriculum as a Team Lead.
+            Josh has spent his programming career working extensively with
+            React, React Native, Redux, and other Frontend technologies, as well
+            as the backends that support them. He is currently a Frontend
+            Engineer at Politech building tools for poltical advocacy. He has
+            Built web and mobile applications as a freelance developer and as
+            Frontend Engineer at Sampleserve. Along side development work he has
+            mentored students through Lambda Schools full stack web development
+            curriculum as a Team Lead.
           </p>
         </section>
       </article>

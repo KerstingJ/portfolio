@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -32,23 +33,23 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link
             href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Quicksand:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
           ></link>
-          <script
-            src="https://kit.fontawesome.com/79b8b1addc.js"
-            crossOrigin="anonymous"
-          ></script>
-          {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-136240788-1"
-          ></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+        </Head>
+        <Script
+          src="https://kit.fontawesome.com/79b8b1addc.js"
+          crossOrigin="anonymous"
+        ></Script>
+        {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-136240788-1"
+        ></Script>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag() {
                 dataLayer.push(arguments);
@@ -56,9 +57,8 @@ export default class MyDocument extends Document {
               gtag("js", new Date());
               gtag("config", "UA-136240788-1");
             `,
-            }}
-          />
-        </Head>
+          }}
+        />
         <body>
           <Main />
           <NextScript />
