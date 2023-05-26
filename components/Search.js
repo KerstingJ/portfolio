@@ -3,7 +3,7 @@ import Fuse from "fuse.js";
 
 import styled from "styled-components";
 
-const TAG_LIST = ["javascript", "project"];
+const TAG_LIST = ["javascript", "project", "general"];
 
 const fuseOptions = {
   threshold: 0.35,
