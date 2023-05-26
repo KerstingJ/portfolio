@@ -24,6 +24,7 @@ export function Code({ children }) {
           className={className}
           style={{
             ...style,
+            background: "rgb(27 15 46)",
             overflow: "scroll",
             marginTop: 20,
             marginBottom: 20,
