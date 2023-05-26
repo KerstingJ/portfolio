@@ -107,11 +107,10 @@ function About(props) {
             </p>
             <p>
               <strong>
-                <a href="https://tiemendo-marketing.netlify.app/">Tieme Ndo</a>
+                <a href="https://connecttma.com/">ConnectTMA</a>
               </strong>{" "}
-              CMS to keep track of leads, loans, and inventory. React web app
-              with Java Spring Backend. Used Redux and bootstrap on the
-              frontend, Hibernate and Postgresql on the backend.
+              Secure video conferencing software for attorneys. Angular web app
+              with .NET backend.
             </p>
             <p>
               And More!
@@ -124,9 +123,7 @@ function About(props) {
               </button>
               about my experience. You can also get a better idea of how I think
               about code by reading through articles on my
-              <Link href="/blog">
-                <a> blog.</a>
-              </Link>
+              <Link href="/blog">blog.</Link>
             </p>
           </section>
         </article>

@@ -10,15 +10,9 @@ export default function HeaderComponent(props) {
           <h1>Josh Kersting</h1>
         </a>
         <nav>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-          <Link href="/about">
-            <a>About</a>
-          </Link>
-          <Link href="/blog">
-            <a>Blog</a>
-          </Link>
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
+          <Link href="/blog">Blog</Link>
         </nav>
       </article>
     </Header>

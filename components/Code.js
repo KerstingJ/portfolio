@@ -1,8 +1,6 @@
-import Highlight, { defaultProps } from "prism-react-renderer";
-import synthwave84 from "prism-react-renderer/themes/synthwave84";
-import nightOwl from "prism-react-renderer/themes/nightOwl";
+import { Highlight, defaultProps, themes } from "prism-react-renderer";
 
-synthwave84.styles.push({
+themes.synthwave84.styles.push({
   types: ["comment", "block-comment", "prolog", "doctype", "cdata"],
   style: {
     color: "#a5b0f0", //"#8e9ced",
@@ -19,7 +17,7 @@ export function Code({ children }) {
       {...defaultProps}
       code={children.props.children.trim()}
       language={language}
-      theme={synthwave84}
+      theme={themes.synthwave84}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre

@@ -42,18 +42,14 @@ function Home({ allMdx }) {
           {allMdx.map(({ title, slug, description }, idx) => {
             return (
               <div className="post-card" key={title + idx}>
-                <Link href={`/blog/${slug}`}>
-                  <a className="title-link">
-                    <h4>{title || "Post Title"}</h4>
-                  </a>
+                <Link href={`/blog/${slug}`} className="title-link">
+                  <h4>{title || "Post Title"}</h4>
                 </Link>
                 <p>
                   {description ||
                     "What is this post all about, This is a placeholder."}
                 </p>
-                <Link href={`/blog/${slug}`}>
-                  <a>Read Post</a>
-                </Link>
+                <Link href={`/blog/${slug}`}>Read Post</Link>
               </div>
             );
           })}
